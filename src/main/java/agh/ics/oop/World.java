@@ -1,23 +1,23 @@
 package agh.ics.oop;
 
 public class World {
-    public static Direction[] conversion(String[] args){
-        Direction[] Directions = new Direction[args.length];
+    public static MoveDirection[] conversion(String[] args){
+        MoveDirection[] Directions = new MoveDirection[args.length];
         for (int i = 0 ; i < args.length; ++i) {
 
-            Direction direction = Direction.FORWARD;
+            MoveDirection direction = MoveDirection.FORWARD;
             switch (args[i]) {
                 case "f":
-                    direction = Direction.FORWARD;
+                    direction = MoveDirection.FORWARD;
                     break;
                 case "b":
-                    direction = Direction.BACKWARD;
+                    direction = MoveDirection.BACKWARD;
                     break;
                 case "r":
-                    direction = Direction.RIGHT;
+                    direction = MoveDirection.RIGHT;
                     break;
                 case "l":
-                    direction = Direction.LEFT;
+                    direction = MoveDirection.LEFT;
                     break;
                 default:
                     System.out.println("Nieznana komenda");
@@ -26,11 +26,11 @@ public class World {
         }
         return Directions;
     }
-    public static void run(Direction[] args){
+    public static void run(MoveDirection[] args){
         System.out.println("Zwierzak idzie do przodu!");
         int i = 0;
         int len = args.length-1;
-        for(Direction argument : args){
+        for(MoveDirection argument : args){
             System.out.print(argument);
             if(i != len)
                 System.out.print(",");
@@ -38,7 +38,7 @@ public class World {
         }
         System.out.println();
         System.out.println("Start");
-        for(Direction argument : args){
+        for(MoveDirection argument : args){
             String message = switch (argument){
                 case FORWARD -> "Zwierzak idzie do przodu";
                 case BACKWARD -> "Zwierzak idzie do tyłu";
@@ -53,9 +53,20 @@ public class World {
     }
     public static void main(String[] args) {
 
-        System.out.println("System wystartował poprawnie!");
-        Direction[] directions = conversion(args);
-        run(directions);
-        System.out.println("System zakończył działanie!");
+
+        Vector2d position1 = new Vector2d(1,2);
+        System.out.println(position1);
+        Vector2d position2 = new Vector2d(-2,1);
+        System.out.println(position2);
+        System.out.println(position1.add(position2));
+        MapDirection direct = MapDirection.EAST;
+        System.out.println(direct.toString());
+        System.out.println((direct.next()).toString());
+        System.out.println((direct.previous()).toString());
+        System.out.println((direct.toUnitVector()).toString());
+        //System.out.println("System wystartował poprawnie!");
+        //Direction[] directions = conversion(args);
+        // run(directions);
+        //System.out.println("System zakończył działanie!");
     }
 }
