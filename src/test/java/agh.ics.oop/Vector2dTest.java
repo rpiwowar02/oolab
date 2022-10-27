@@ -6,8 +6,8 @@ class Vector2dTest {
 
     @org.junit.jupiter.api.Test
     void toStringTest() {
-        Vector2d tmp = new Vector2d(100,0);
-        Assertions.assertEquals("(100,0)",tmp.toString());
+        Vector2d tmp = new Vector2d(100,50);
+        Assertions.assertEquals("(100,50)",tmp.toString());
     }
 
     @org.junit.jupiter.api.Test
