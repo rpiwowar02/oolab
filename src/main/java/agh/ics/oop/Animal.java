@@ -3,18 +3,32 @@ package agh.ics.oop;
 public class Animal {
     private Vector2d Position;
     private MapDirection Orientation;
-    public Animal(){
-        Position = new Vector2d(2,2);
-        Orientation = MapDirection.NORTH;
+    private IWorldMap map;
+    //public Animal(){
+    //    Position = new Vector2d(2,2);
+    //    Orientation = MapDirection.NORTH;
+    //}
+    public Animal(IWorldMap map){
+        this.map = map;
+    }
+    public Animal(IWorldMap map,Vector2d position){
+        this.map = map;
+        if (map.canMoveTo(position)){
+            this.Position = position;
+            this.Orientation = MapDirection.NORTH;
+        }
     }
     public String toString(){
-        return "(" + this.Position.x + "," + this.Position.y + "," + this.Orientation + ")";
+        return "" + this.Orientation;
     }
     public boolean isAt(Vector2d position){
         return (this.Position).equals(position);
     }
+    public Vector2d Get(){
+        return Position;
+    }
     public void Move(MoveDirection direction){
-
+        System.out.println(direction.toString());
         switch (direction){
             case FORWARD,BACKWARD: {
                 Vector2d Move = switch(Orientation){
@@ -27,10 +41,9 @@ public class Animal {
                     Move = Move.opposite();
                     }
                 Move = Move.add(this.Position);
-                if (Move.x < 0 || Move.x > 4 || Move.y < 0 || Move.y > 4) {
-                    return;
+                if (map.canMoveTo(Move)){
+                    this.Position = Move;
                     }
-                this.Position = Move;
                 }break;
             case LEFT: {
                 this.Orientation = (this.Orientation).previous();

@@ -24,7 +24,7 @@ public class World {
                     break;
                 default:
                     System.out.println("Nieznana komenda");
-            };
+            }
             Directions[i] = direction;
         }
         return Directions;
@@ -56,28 +56,11 @@ public class World {
     }
     public static void main(String[] args) {
 
-        Animal zwierzak = new Animal();
-        System.out.println(zwierzak.toString());
-        System.out.println(Arrays.stream(args).collect(Collectors.toList()));
         MoveDirection[] directions = OptionsParser.parse(args);
-        for (MoveDirection arg: directions) {
-                System.out.println(arg.toString());
-                zwierzak.Move(arg);
-        }
-        System.out.println(zwierzak.toString());
-        //Vector2d position1 = new Vector2d(1,2);
-        //position1);
-        //Vector2d position2 = new Vector2d(-2,1);
-        //System.out.println(position2);
-        //System.out.println(position1.add(position2));
-        //MapDirection direct = MapDirection.EAST;
-        //System.out.println(direct.toString());
-        //System.out.println((direct.next()).toString());
-        //System.out.println((direct.previous()).toString());
-        //System.out.println((direct.toUnitVector()).toString());
-        //System.out.println("System wystartował poprawnie!");
-        //Direction[] directions = conversion(args);
-        // run(directions);
-        //System.out.println("System zakończył działanie!");
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run(map);
+
     }
 }
