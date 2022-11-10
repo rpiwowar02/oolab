@@ -10,6 +10,8 @@ public class Animal {
     //}
     public Animal(IWorldMap map){
         this.map = map;
+        Position = new Vector2d(2,2);
+        Orientation = MapDirection.NORTH;
     }
     public Animal(IWorldMap map,Vector2d position){
         this.map = map;
@@ -18,6 +20,8 @@ public class Animal {
             this.Orientation = MapDirection.NORTH;
         }
     }
+
+
     public String toString(){
         return "" + this.Orientation;
     }
@@ -28,7 +32,7 @@ public class Animal {
         return Position;
     }
     public void Move(MoveDirection direction){
-        System.out.println(direction.toString());
+        //System.out.println(direction.toString());
         switch (direction){
             case FORWARD,BACKWARD: {
                 Vector2d Move = switch(Orientation){

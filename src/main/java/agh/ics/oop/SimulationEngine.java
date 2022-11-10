@@ -14,16 +14,16 @@ public class SimulationEngine implements IEngine{
         for (Vector2d start : starts) {
             map.place(new Animal(map, start));
         }
-        System.out.println(map.toString());
+        //System.out.println(map.toString());
         int ind=0;
         for(MoveDirection direction : directions){
 
             map.GetList().get(ind).Move(direction);
             ind = (ind + 1) % NoAnimals;
             if(ind == 0){
-                System.out.println(map.toString());
+                //System.out.println(map.toString());
             }
         }
-
+        //System.out.println(map.toString());
     }
 }

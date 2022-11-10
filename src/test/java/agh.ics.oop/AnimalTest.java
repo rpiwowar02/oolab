@@ -1,4 +1,4 @@
-package agh.ics.oop;
+/*package agh.ics.oop;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -49,4 +49,4 @@ class AnimalTest {
                 }
             }
         }
-}
+}*/
