@@ -7,17 +7,14 @@ class GrassFieldTest {
     @org.junit.jupiter.api.BeforeEach
     public void init(){
 
-        String[] args = new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
+        String[] args = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
         MoveDirection[] directions = OptionsParser.parse(args);
-        this.map = new GrassField(10);
+        this.map = new GrassField(5);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run(this.map);
+        IPositionChangeObserver obs = (IPositionChangeObserver) map;
+        IEngine engine = new SimulationEngine(directions, map, positions,obs);
+        engine.run(map);
 
-    }
-    @org.junit.jupiter.api.Test
-    void getList() {
-        Assertions.assertEquals(this.map.GetList(),this.map.GetList());
     }
 
     @org.junit.jupiter.api.Test
@@ -40,8 +37,8 @@ class GrassFieldTest {
 
     @org.junit.jupiter.api.Test
     void place() {
-        Assertions.assertEquals(this.map.GetList().get(0).Get(),new Vector2d(2,-1));
-        Assertions.assertEquals(this.map.GetList().get(1).Get(),new Vector2d(3,7));
+        Assertions.assertEquals(this.map.GetDictionary().get((new Vector2d(3,7))),this.map.objectAt(new Vector2d(3,7)));
+        Assertions.assertEquals(this.map.GetDictionary().get((new Vector2d(2,-1))),this.map.objectAt(new Vector2d(2,-1)));
     }
 
     @org.junit.jupiter.api.Test
@@ -54,8 +51,8 @@ class GrassFieldTest {
 
     @org.junit.jupiter.api.Test
     void objectAt() {
-        Assertions.assertEquals(this.map.GetList().get(0),this.map.objectAt(new Vector2d(2,-1)));
-        Assertions.assertEquals(this.map.GetList().get(1),this.map.objectAt(new Vector2d(3,7)));
+        Assertions.assertEquals(this.map.GetDictionary().get((new Vector2d(3,7))),this.map.objectAt(new Vector2d(3,7)));
+        Assertions.assertEquals(this.map.GetDictionary().get((new Vector2d(2,-1))),this.map.objectAt(new Vector2d(2,-1)));
     }
 
 }

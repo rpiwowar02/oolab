@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface IWorldMap {
     String toString();
-    ArrayList<Animal> GetList();
+    Map<Vector2d, Animal>  GetDictionary();
     /**
      * Indicate if any object can move to the given position.
      *
