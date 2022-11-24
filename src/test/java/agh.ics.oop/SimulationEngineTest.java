@@ -1,6 +1,8 @@
 package agh.ics.oop;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SimulationEngineTest {
@@ -12,12 +14,11 @@ class SimulationEngineTest {
         MoveDirection[] directions = OptionsParser.parse(args);
         IWorldMap map = new RectangularMap(10, 5);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IPositionChangeObserver obs = (IPositionChangeObserver) map;
+        IPositionChangeObserver obsMap = (IPositionChangeObserver) map;
+        LinkedList<IPositionChangeObserver> obs = new LinkedList<>();
+        obs.add(obsMap);
         IEngine engine = new SimulationEngine(directions, map, positions,obs);
         engine.run(map);
-        Assertions.assertEquals(map.GetDictionary().get((new Vector2d(3,5))),map.objectAt(new Vector2d(3,5)));
-        Assertions.assertEquals(map.GetDictionary().get((new Vector2d(2,0))),map.objectAt(new Vector2d(2,0)));
-
 
 
     }

@@ -1,7 +1,15 @@
 package agh.ics.oop;
 
+import javax.sound.sampled.Line;
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.LinkedList;
+
+import agh.ics.oop.gui.App;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 public class World {
     public static MoveDirection[] conversion(String[] args){
@@ -55,20 +63,9 @@ public class World {
         System.out.println();
     }
     public static void main(String[] args) {
+        args = new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f","f","f","f","f"};
+        Application.launch(App.class, args);
 
-        /*MoveDirection[] directions = OptionsParser.parse(args);
-        IWorldMap map = new RectangularMap(10, 5);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IPositionChangeObserver obs = (IPositionChangeObserver) map;
-        IEngine engine = new SimulationEngine(directions, map, positions,obs);
-        engine.run(map);*/
-        args = new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
-        MoveDirection[] directions = OptionsParser.parse(args);
-        IWorldMap map = new GrassField(10);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IPositionChangeObserver obs = (IPositionChangeObserver) map;
-        IEngine engine = new SimulationEngine(directions, map, positions,obs);
-        engine.run(map);
 
     }
 }

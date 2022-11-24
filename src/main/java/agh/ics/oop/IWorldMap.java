@@ -1,7 +1,5 @@
 package agh.ics.oop;
 
-import javax.lang.model.type.ArrayType;
-import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -26,11 +24,9 @@ public interface IWorldMap {
     /**
      * Place a animal on the map.
      *
-     * @param animal
-     *            The animal to place on the map.
-     * @return True if the animal was placed. The animal cannot be placed if the map is already occupied.
+     * @param animal The animal to place on the map.
      */
-    boolean place(Animal animal);
+    void place(Animal animal);
 
     /**
      * Return true if given position on the map is occupied. Should not be

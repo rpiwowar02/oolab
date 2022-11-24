@@ -1,17 +1,23 @@
 package agh.ics.oop;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.LinkedList;
+
 
 class GrassFieldTest {
     IWorldMap map;
     @org.junit.jupiter.api.BeforeEach
     public void init(){
 
-        String[] args = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
+        String[] args = new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
+        LinkedList<IPositionChangeObserver> obs = new LinkedList<>();
         MoveDirection[] directions = OptionsParser.parse(args);
-        this.map = new GrassField(5);
+        IPositionChangeObserver borders = new MapBoundary();
+        this.map = new GrassField(5, (MapBoundary) borders);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IPositionChangeObserver obs = (IPositionChangeObserver) map;
+        IPositionChangeObserver obsMap = (IPositionChangeObserver) map;
+        obs.add(borders);
+        obs.add(obsMap);
         IEngine engine = new SimulationEngine(directions, map, positions,obs);
         engine.run(map);
 

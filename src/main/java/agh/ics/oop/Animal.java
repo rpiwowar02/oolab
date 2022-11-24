@@ -24,6 +24,8 @@ public class Animal {
             this.Position = position;
             this.Orientation = MapDirection.NORTH;
         }
+        else
+            throw new IllegalArgumentException(position + " is occupied");
     }
     private void positionChanged(Vector2d newPosition){
         for(IPositionChangeObserver o: observers){

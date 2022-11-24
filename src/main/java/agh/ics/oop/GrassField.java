@@ -1,23 +1,22 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
 import java.lang.Math;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 public class GrassField extends AbstractWorldMap {
     Map<Vector2d, Grass> Grasses;
     private int NoGrass;
-    public GrassField(int no){
-
+    MapBoundary borders;
+    public GrassField(int no,MapBoundary borders){
+        no = no + 1;
         int range = (int)Math.sqrt(no*10);
         this.animals = new HashMap<>();
         this.Grasses = new HashMap<>();
         this.NoGrass = no;
-        super.LeftDown = new Vector2d(0,0);
-        super.RightUp = new Vector2d(0,0);
+        this.borders = borders;
         RandomGrass(range);
+
     }
     private int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
@@ -53,10 +52,17 @@ public class GrassField extends AbstractWorldMap {
     }
     public boolean placeGrass(Grass grass){
         this.Grasses.put(grass.getPosition(),grass);
-        super.LeftDown = super.LeftDown.lowerLeft(grass.getPosition());
-        super.RightUp = super.RightUp.upperRight(grass.getPosition());
+        borders.add(grass.getPosition());
+
 
         return true;
+    }
+    public String toString(){
+       return super.toString(borders.GetLeftDown(),borders.GetRightUp());
+    }
+    public void place(Animal animal){
+        super.place(animal);
+        borders.add(animal.Get());
     }
 
     public boolean isOccupied(Vector2d position){

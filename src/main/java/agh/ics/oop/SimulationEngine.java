@@ -5,23 +5,25 @@ import java.util.LinkedList;
 public class SimulationEngine implements IEngine{
     private MoveDirection[] directions;
     private Vector2d[] positions;
-    private IPositionChangeObserver obs;
+    LinkedList<IPositionChangeObserver> obs;
     private final int NoAnimals;
-    public SimulationEngine(MoveDirection[] directions,IWorldMap map,Vector2d[] starts,IPositionChangeObserver obs){
+    public SimulationEngine(MoveDirection[] directions,IWorldMap map,Vector2d[] starts,LinkedList<IPositionChangeObserver> observers){
         this.directions = directions;
         this.positions = starts;
         this.NoAnimals = starts.length;;
-        this.obs = obs;
+        this.obs = observers;
     }
 
     public void run(IWorldMap map){
 
         for (Vector2d start : positions) {
             Animal a = new Animal(map,start);
-            a.addObserver(obs);
+            for(IPositionChangeObserver o : obs){
+                a.addObserver(o);
+            }
             map.place(a);
         }
-        //System.out.println(map.toString());
+        System.out.println(map.toString());
         int ind=0;
         for(MoveDirection direction : directions){
 
@@ -32,9 +34,9 @@ public class SimulationEngine implements IEngine{
             //System.out.println(A.toString());
             //System.out.println(A.Get());
             ind = (ind + 1) % NoAnimals;
-            //if(ind == 0){
-            //    System.out.println(map.toString());
-            //}
+            if(ind == 0){
+                System.out.println(map.toString());
+            }
         }
         System.out.println(map.toString());
     }
