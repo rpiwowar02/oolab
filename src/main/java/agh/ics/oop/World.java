@@ -63,8 +63,10 @@ public class World {
         System.out.println();
     }
     public static void main(String[] args) {
+        //args = new String[]{"b","b","b","b","b","b","b"};
         args = new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f","f","f","f","f"};
         Application.launch(App.class, args);
+
 
 
     }

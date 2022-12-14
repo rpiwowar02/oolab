@@ -3,17 +3,17 @@ import java.util.Map;
 
 abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     protected int AnimalsLen;
-    protected Map<Vector2d, Animal> animals;
-    public Map<Vector2d, Animal> GetDictionary(){
+    protected Map<Vector2d, IMapElement> animals;
+    public Map<Vector2d, IMapElement> GetDictionary(){
         return animals;
     }
     public void place(Animal animal){
-        if(isOccupied(animal.Get())){
-            throw new IllegalArgumentException(animal.Get() + " is occupied");
+        if(isOccupied(animal.getPosition())){
+            throw new IllegalArgumentException(animal.getPosition() + " is occupied");
             //return false;
         }
 
-        this.animals.put(animal.Get(),animal);
+        this.animals.put(animal.getPosition(),animal);
         //this.animals.add(animal);
         //System.out.println(animal.Get());
         //System.out.println(((Animal)objectAt(animal.Get())).toString());
@@ -23,8 +23,7 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
         if(!isOccupied(newPosition)){
 
-            Animal A = animals.get(oldPosition);
-            animals.put(newPosition,A);
+            animals.put(newPosition,animals.get(oldPosition));
             animals.remove(oldPosition);
         }
 
@@ -36,6 +35,9 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
     }
     public boolean isOccupied(Vector2d position){
         return this.animals.get(position) != null;
+    }
+    public IMapElement objectAt(Vector2d position){
+        return this.animals.get(position);
     }
 
 

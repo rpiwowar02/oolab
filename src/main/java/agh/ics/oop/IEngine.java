@@ -14,4 +14,5 @@ public interface IEngine {
      *
      */
     void run(IWorldMap map);
+    Vector2d[] getPositions();
 }

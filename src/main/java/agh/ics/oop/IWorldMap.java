@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public interface IWorldMap {
     String toString();
-    Map<Vector2d, Animal>  GetDictionary();
+    Map<Vector2d, IMapElement> GetDictionary();
     /**
      * Indicate if any object can move to the given position.
      *
@@ -46,5 +46,5 @@ public interface IWorldMap {
      *            The position of the object.
      * @return Object or null if the position is not occupied.
      */
-    Object objectAt(Vector2d position);
+    IMapElement objectAt(Vector2d position);
 }

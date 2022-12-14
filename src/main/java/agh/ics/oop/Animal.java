@@ -1,10 +1,8 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
-public class Animal {
+public class Animal implements IMapElement{
     private Vector2d Position;
     private MapDirection Orientation;
     private static IWorldMap map;
@@ -18,19 +16,26 @@ public class Animal {
         Position = new Vector2d(2,2);
         Orientation = MapDirection.NORTH;
     }
+    public String getLabel(){
+        return "Z " + getPosition().toString();
+    }
     public Animal(IWorldMap map,Vector2d position){
         this.map = map;
-        if (map.canMoveTo(position)){
-            this.Position = position;
-            this.Orientation = MapDirection.NORTH;
-        }
-        else
-            throw new IllegalArgumentException(position + " is occupied");
+        this.Position = position;
+        this.Orientation = MapDirection.NORTH;
     }
     private void positionChanged(Vector2d newPosition){
         for(IPositionChangeObserver o: observers){
             o.positionChanged(this.Position,newPosition);
         }
+    }
+    public String getResources() {
+        return switch (Orientation){
+            case NORTH -> "up";
+            case EAST -> "right";
+            case SOUTH -> "down";
+            case WEST -> "left";
+                };
     }
     public void addObserver(IPositionChangeObserver observer){
         observers.add(observer);
@@ -46,7 +51,7 @@ public class Animal {
     public boolean isAt(Vector2d position){
         return (this.Position).equals(position);
     }
-    public Vector2d Get(){
+    public Vector2d getPosition(){
         return Position;
     }
 
@@ -73,9 +78,11 @@ public class Animal {
                 }break;
             case LEFT: {
                 this.Orientation = (this.Orientation).previous();
+                this.positionChanged(this.Position);
             }break;
             case RIGHT: {
                 this.Orientation = (this.Orientation).next();
+                this.positionChanged(this.Position);
             }break;
 
 

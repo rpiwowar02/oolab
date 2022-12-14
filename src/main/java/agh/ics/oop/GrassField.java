@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GrassField extends AbstractWorldMap {
-    Map<Vector2d, Grass> Grasses;
+    Map<Vector2d, IMapElement> Grasses;
     private int NoGrass;
     MapBoundary borders;
     public GrassField(int no,MapBoundary borders){
@@ -62,14 +62,15 @@ public class GrassField extends AbstractWorldMap {
     }
     public void place(Animal animal){
         super.place(animal);
-        borders.add(animal.Get());
+        borders.add(animal.getPosition());
     }
 
     public boolean isOccupied(Vector2d position){
         return super.isOccupied(position);
     }
-    public Object objectAt(Vector2d position){
-        Object tmp = super.animals.get(position);
+    @Override
+    public IMapElement objectAt(Vector2d position){
+        IMapElement tmp = super.animals.get(position);
         if(tmp == null)
             return this.Grasses.get(position);
         return tmp;

@@ -11,7 +11,7 @@ class OptionsParserTest {
                 MoveDirection.BACKWARD,MoveDirection.FORWARD,MoveDirection.FORWARD,MoveDirection.RIGHT,MoveDirection.LEFT,
                 MoveDirection.BACKWARD,MoveDirection.FORWARD};
         int i = 0;
-        String[] args = { "r", "f", "l", "f", "b", "d", "f","forward","right","left","backward","forward"};
+        String[] args = { "r", "f", "l", "f", "b", "f","forward","right","left","backward","forward"};
 
         MoveDirection[] answers = parse(args);
         for (MoveDirection d: expected) {
